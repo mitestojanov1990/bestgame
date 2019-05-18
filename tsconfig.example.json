@@ -1,0 +1,47 @@
+{
+
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "target": "es6",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": true,
+        "importHelpers": true,
+
+        "types": [
+            "node"
+        ],
+
+
+        "lib": [
+            "es2017",
+
+            "es2015",
+            "dom"
+        ]
+    },
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "paths": {
+        "components/*": [ "app/components/*" ],
+        "types/*": [ "types/*" ],
+        "logger": [ "util/logger" ],
+        "node_modules/*": [ "node_modules/*" ]
+    },
+    "include": [
+        "./src/**/*.ts", "migrations/1558032638671-villains.js", "migrations/1558025738931-avengers.js"
+    ],
+    "exclude": [
+        "./src/**/*.test.ts",
+        "./src/public/"
+    ]
+}

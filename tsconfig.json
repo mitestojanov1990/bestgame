@@ -1,3 +1,4 @@
+
 {
     "compilerOptions": {
         "module": "commonjs",
@@ -8,14 +9,29 @@
         "sourceMap": true,
         "outDir": "dist",
         "baseUrl": ".",
-        "paths": {
-            "*": [
-                "node_modules/*",
-                "src/types/*"
-            ]
-        }
+        "strict": true,
+        "rootDirs": ["src", "migrations"],
+        "declaration": true,
+        "removeComments": true,
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": true,
+        "importHelpers": true,
+        "types": [
+            "reflect-metadata"
+        ],
+        "lib": [
+            "es2015"
+        ]
     },
+    "experimentalDecorators": true,
     "include": [
-        "src/**/*", "migrations/1558032638671-villains.js", "migrations/1558025738931-avengers.js"
+        "./src/**/*.ts", "migrations/1558032638671-villains.js", "migrations/1558025738931-avengers.js"
+    ],
+    "exclude": [
+        "./src/**/*.test.ts",
+        "./src/public/",
+        "node_modules"
     ]
 }

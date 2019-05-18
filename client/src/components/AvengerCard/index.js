@@ -4,23 +4,23 @@ class AvengerCard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loading: true, avenger: {}, selected: false }
+    this.state = { loading: true, avenger: {}, selected: false };
   }
 
   async componentDidMount() {
     //fetch image
-    let response = await fetch(`http://localhost:5000/avengers/${this.props.avenger.id}`)
-    let data = await response.json()
+    let response = await fetch(`http://localhost:5000/avengers/${this.props.avenger.id}`);
+    let data = await response.json();
     this.setState({
       loading: false,
       avenger: data
-    })
+    });
   }
 
   toggleAvengerSelection() {
     this.setState({
       selected: !this.state.selected
-    })
+    });
   }
 
   render() {
@@ -28,7 +28,7 @@ class AvengerCard extends Component {
       return (
         <div className="avenger-card" onClick={(e) => this.toggleAvengerSelection(e)}>
           <div className="card-frame">
-            <img src="{this.state.avenger.image}" alt="{this.state.avenger.name}"/>
+            <img src="{this.state.avenger.image}" alt="{this.state.avenger.name}" />
           </div>
           <div className="card-body">
             <p className="avenger-name">{this.state.avenger.name}</p>

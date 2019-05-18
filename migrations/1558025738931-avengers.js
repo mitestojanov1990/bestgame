@@ -3,43 +3,41 @@
 const Bluebird = require('bluebird');
 const mongodb = require('mongodb');
 const mongoose = require("mongoose");
-const { MONGODB_URI, SESSION_SECRET } = require("../dist/util/secrets");
-const { Avenger } = require("../dist/models/Avenger");
-const { Attributes } = require("../dist/models/Attributes");
+const { SERVER_CONFIG } = require("../dist/app/util/constants");
+const { Avenger } = require("../dist/app/modules/avengers/schemas/avengers.schema");
+const { Attributes } = require("../dist/app/modules/attributes/schemas/attributes.schema");
 const { StaticData } = require("../dist/staticData");
 
 const MongoClient = mongodb.MongoClient;
-const url = 'mongodb://localhost:27017/myapp';
 
 Bluebird.promisifyAll(MongoClient);
 
-const createAttributes = (attrs, next) => {
-  Attributes.create(attrs, (err, attributes) => {
-    if (err) { return next("error creating attributes for avenger: " + err); }
-    return next(attributes._id);
-  });
-};
-const update = (avenger, next) => {
-  avenger.save((err) => {
-    if (err) { return next("error updating avenger with attributes id: " + err); }
-    return next();
-  });
-};
 const create = (data, next) => {
-  Avenger.create(data, (err, avenger) => {
-    if (err) { return next("error creating avenger: " + err); }
+  const avenger = new Avenger({
+    _id: new mongoose.Types.ObjectId(),
+    name: data.name,
+    image: data.image
+  });
 
-    createAttributes(data.attrs, (attributesId) => {
-      avenger.attributesId = attributesId;
-      update(avenger, next);
+  avenger.save((err) => {
+    if (err) { return next("error creating avenger: " + err); }
+    const attributes = new Attributes({
+      health: data.attrs.health,
+      attack: data.attrs.attack,
+      defense: data.attrs.defense,
+      avengerId: avenger._id
+    });
+    attributes.save((err) => {
+      if (err) { return next("error creating attributes for avenger: " + err); }
     });
   });
 };
 
 module.exports.up = next => {
   // Connect to MongoDB
-  const mongoUrl = MONGODB_URI;
+  const mongoUrl = SERVER_CONFIG.db;
   mongoose.Promise = Bluebird;
+  
   mongoose.connect(mongoUrl, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => {
 
@@ -81,7 +79,7 @@ const getAvengers = (next) => {
 
 module.exports.down = next => {
   // Connect to MongoDB
-  const mongoUrl = MONGODB_URI;
+  const mongoUrl = SERVER_CONFIG.db;
   mongoose.Promise = Bluebird;
   mongoose.connect(mongoUrl, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => {
