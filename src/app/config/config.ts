@@ -1,4 +1,18 @@
 import { extractKey } from '../util/keys';
+import dotenv from 'dotenv';
+import fs from 'fs';
+
+if (fs.existsSync('.env')) {
+    dotenv.config({ path: '.env' });
+}
+
+export const ENVIRONMENT = process.env.NODE_ENV;
+const prod = ENVIRONMENT === 'production'; // Anything else is treated as 'dev'
+
+export const MONGODB_URI = prod ? process.env.MONGODB_URI : process.env.MONGODB_URI;
+if (!MONGODB_URI) {
+  throw Error('Please check your .env file!');
+}
 
 interface IEnvironmentConfig {
   rootPath: string;
@@ -23,7 +37,7 @@ const jwtSecret = extractKey(`${rootPath}/keys/game.private.key`);
 const Config: IConfig = {
   development: {
     rootPath,
-    db: 'mongodb://localhost:27017/myapp',
+    db: MONGODB_URI,
     httpPort: 3001,
     wsPort: 3003,
     jwtSecret,
@@ -33,7 +47,7 @@ const Config: IConfig = {
   },
   production: {
     rootPath,
-    db: 'mongodb://localhost:27017/myapp',
+    db: MONGODB_URI,
     httpPort: 3001,
     wsPort: 3003,
     jwtSecret,
