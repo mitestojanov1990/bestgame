@@ -2,7 +2,7 @@ export const StaticData = {
     'Avengers': [
         {
             'name': 'Captain Marvel',
-            'image': 'none',
+            'image': 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/008cmv_ons_crd_04.jpg',
             'attributes': {
                 'health': 100,
                 'attack': 10,
@@ -11,7 +11,7 @@ export const StaticData = {
         },
         {
             'name': 'Thanos',
-            'image': 'none',
+            'image': 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/019tha_ons_crd_03.jpg',
             'attributes': {
                 'health': 100,
                 'attack': 20,
@@ -20,7 +20,7 @@ export const StaticData = {
         },
         {
             'name': 'Black Panther',
-            'image': 'none',
+            'image': 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/007blp_ons_crd_02.jpg',
             'attributes': {
                 'health': 100,
                 'attack': 10,
@@ -47,7 +47,7 @@ export const StaticData = {
         },
         {
             'name': 'Goose the Cat',
-            'image': 'none',
+            'image': 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/247gse_ons_crd_01.jpg',
             'attributes': {
                 'health': 100,
                 'attack': 10,
@@ -83,7 +83,7 @@ export const StaticData = {
         },
         {
             'name': 'Hulk',
-            'image': 'none',
+            'image': 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/006hbb_ons_crd_03.jpg',
             'attributes': {
                 'health': 100,
                 'attack': 10,
@@ -92,7 +92,7 @@ export const StaticData = {
         },
         {
             'name': 'Hawkeye',
-            'image': 'none',
+            'image': 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/018hcb_ons_crd_02.jpg',
             'attributes': {
                 'health': 100,
                 'attack': 10,

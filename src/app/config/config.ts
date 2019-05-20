@@ -24,7 +24,7 @@ const Config: IConfig = {
   development: {
     rootPath,
     db: 'mongodb://localhost:27017/myapp',
-    httpPort: 3000,
+    httpPort: 3001,
     wsPort: 3003,
     jwtSecret,
     domain: 'localhost',
@@ -34,7 +34,7 @@ const Config: IConfig = {
   production: {
     rootPath,
     db: 'mongodb://localhost:27017/myapp',
-    httpPort: 3000,
+    httpPort: 3001,
     wsPort: 3003,
     jwtSecret,
     domain: 'localhost',
