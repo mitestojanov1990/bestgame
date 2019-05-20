@@ -9,7 +9,7 @@ To build and run this app locally you will need a few things:
 # Getting started
 - Clone the repository
 ```
-git clone https://github.com/mitestojanov1990/bestgame.git <project_name>
+git clone https://github.com/mitestojanov1990/marvelgame.git <project_name>
 ```
 - Install dependencies
 ```
@@ -65,10 +65,15 @@ yarn dev
 
 # Backend explained
 ```
-The backend is build with a framework called NestJS. Link: https://docs.nestjs.com/
-It is using and fully supports TypeScript.
+- The backend is build with a framework called NestJS. Link: https://docs.nestjs.com/
+- It is using and fully supports TypeScript.
 
-I have built a server using Express, which you can find on this git branch: 
+- I have built a server using Express, which you can find on this git branch: 
 
-The reason I changed it is simple because it is a lot easier and faster to write and run NestJS. I like the architecture because it is inspired and very closely related to how Angular works (Dependency Injection). I believe anyone can understand and find its way through NestJS module architecture.
+- The reason I changed it is simple because it is a lot easier and faster to write and run NestJS. I like the architecture because it is inspired and very closely related to how Angular works (Dependency Injection). I believe anyone can understand and find its way through NestJS module architecture.
+- NestJS is using either Express or Fastify as web framework. I went with Fastify for no apperant reason. Fastify is inspired by Express..
+- NestJS out of the box has Swagger UI support.
+
+- After starting the server you can navigate to: http://localhost:3001/api
+- There you will find all available REST end points.
 ```
