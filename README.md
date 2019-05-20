@@ -35,39 +35,37 @@ npm install
 or
 yarn
 ```
-- Configure your mongoDB server
-```
-Start your mongoDB server, you check how to make it a windows service here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+# Configure your mongoDB server
+- Start your mongoDB server, you check how to make it a windows service here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
-- Build and run the project
-- build server
+- Build server
 ```
 npm run build
 or
 yarn build
-
+```
 - .ENV setup
 ```
 Please copy or rename .env.example to .env and set you mongodb connection string there
-
+```
 - Start server with
 ```
 npm run start
 or
 yarn start
-
+```
 - Debug server with
 ```
 npm run serve-debug
 or
 yarn serve-debug
-
+```
 - Start both server and client with one command
 ```
 npm run dev
 or
 yarn dev
-
+```
 # Data Migration
 - I was not able to use package migrate with NestJS, so just for this exercise I made two REST end points who will bulk insert or delete data from the database
 - You can find the end points in the Swagger UI link:
