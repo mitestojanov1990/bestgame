@@ -27,6 +27,7 @@
         ],
         "whitespace": [
             true,
+            "single",
             "check-branch",
             "check-decl",
             "check-operator",

@@ -11,3 +11,25 @@ To build and run this app locally you will need a few things:
 ```
 git clone https://github.com/mitestojanov1990/marvelgame.git <project_name>
 ```
+- Set .env. Please copy or rename .env.example to .env and set your mongodb connection string
+
+# Build the server
+
+npm run build
+or
+yarn build
+
+# Run the server
+
+npm run start
+or
+yarn start
+
+you can fetch avengers from: http://localhost:5000/avengers
+
+# Data Migration 
+- You can run 
+migrate up 
+# to bulk insert some data in the database
+migrate down
+# to delete all data from the database

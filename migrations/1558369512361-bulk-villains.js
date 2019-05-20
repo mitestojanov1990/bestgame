@@ -4,7 +4,7 @@ const Bluebird = require('bluebird');
 const mongodb = require('mongodb');
 const mongoose = require("mongoose");
 const { MONGODB_URI, SESSION_SECRET } = require("../dist/util/secrets");
-const { Avenger } = require("../dist/models/Avenger");
+const { Villain } = require("../dist/models/Villain");
 const { Attributes } = require("../dist/models/Attributes");
 const { StaticData } = require("../dist/staticData");
 
@@ -15,23 +15,23 @@ Bluebird.promisifyAll(MongoClient);
 
 const createAttributes = (attrs, next) => {
   Attributes.create(attrs, (err, attributes) => {
-    if (err) { return next("error creating attributes for avenger: " + err); }
+    if (err) { return next("error creating attributes for villains: " + err); }
     return next(attributes._id);
   });
 };
-const update = (avenger, next) => {
-  avenger.save((err) => {
-    if (err) { return next("error updating avenger with attributes id: " + err); }
+const update = (villain, next) => {
+  villain.save((err) => {
+    if (err) { return next("error updating villain with attributes id: " + err); }
     return next();
   });
 };
 const create = (data, next) => {
-  Avenger.create(data, (err, avenger) => {
-    if (err) { return next("error creating avenger: " + err); }
+  Villain.create(data, (err, villain) => {
+    if (err) { return next("error creating villain: " + err); }
 
-    createAttributes(data.attrs, (attributesId) => {
-      avenger.attributesId = attributesId;
-      update(avenger, next);
+    createAttributes(data.attributes, (attributesId) => {
+      villain.attributesId = attributesId;
+      update(villain, next);
     });
   });
 };
@@ -44,11 +44,11 @@ module.exports.up = next => {
     .then(() => {
 
       let counter = 0;
-      StaticData.Avengers.forEach((avengerData) => {
-        create(avengerData, (err) => {
+      StaticData.Villains.forEach((villainData) => {
+        create(villainData, (err) => {
           if(err) { return next(err); }
           counter++;
-          if (counter === StaticData.Avengers.length)
+          if (counter === StaticData.Villains.length)
             return next();
         });
       });
@@ -60,22 +60,22 @@ module.exports.up = next => {
 }
 
 const removeAttributes = (attrId, next) => {
-  Attributes.findByIdAndRemove(attrId, (err, attributes) => {
-    if (err) { return next("Error removing attributes for avenger " + err); }
+  Attributes.findByIdAndRemove({_id: attrId}, (err, attributes) => {
+    if (err) { return next("Error removing attributes for villain " + err); }
     return next();
   });
 };
 
-const remove = (avenger, next) => {
-  Avenger.findByIdAndRemove(avenger._id, (err, removedAvenger) => {
-    if (err) { return next("Error finding avenger for remove " + err); }
-    removeAttributes(removedAvenger.attributesId, next);
+const remove = (villain, next) => {
+  Villain.findByIdAndRemove({_id: villain._id}, (err, removed) => {
+    if (err) { return next("Error finding villain for remove " + err); }
+    removeAttributes(removed.attributesId, next);
   });
 };
-const getAvengers = (next) => {
-  Avenger.find({}, (err, avengers) => {
-    if (err) { return next("Error finding avengers " + err); }
-    return next(avengers);
+const getVillains = (next) => {
+  Villain.find({}, (err, villains) => {
+    if (err) { return next("Error finding villains " + err); }
+    return next(villains);
   });
 };
 
@@ -85,10 +85,10 @@ module.exports.down = next => {
   mongoose.Promise = Bluebird;
   mongoose.connect(mongoUrl, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => {
-      getAvengers((avengers) => {
-        let counter = avengers.length;
-        avengers.forEach((avenger) => {
-          remove(avenger, (err) => {
+      getVillains((villains) => {
+        let counter = villains.length;
+        villains.forEach((villain) => {
+          remove(villain, (err) => {
             if(err) { return next(err); }
             counter--;
             if (counter === 0)
