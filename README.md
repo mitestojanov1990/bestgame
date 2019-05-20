@@ -38,13 +38,13 @@ yarn
 # Configure your mongoDB server
 - Start your mongoDB server, you check how to make it a windows service here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
-- Build server
+# Build server
 ```
 npm run build
 or
 yarn build
 ```
-- .ENV setup
+# .ENV setup
 ```
 Please copy or rename .env.example to .env and set you mongodb connection string there
 ```
